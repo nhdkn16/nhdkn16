@@ -7,6 +7,9 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   generate-pacman:
     runs-on: ubuntu-latest
@@ -14,15 +17,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate Pacman graph
         uses: jstrieb/github-activity-readme@master
+        with:
+          commit_message: "Update Pacman graph"
+          committer_username: "GitHub Action"
+          committer_email: "action@github.com"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          outputs: |
-            dist/pacman-contribution-graph.svg
-            dist/pacman-contribution-graph-dark.svg?palette=github-dark
+
+      - name: Move files to dist folder
+        run: |
+          mkdir -p dist
+          mv output/*.svg dist/ || true
 
       - name: Deploy to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
