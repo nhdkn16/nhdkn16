@@ -43,6 +43,7 @@
 ###
 
 <div align="center">
+  <h3>-- Contact --</h3>
   <a href="https://facebook.com/nguyenhaidang45" target="_blank">
     <img src="https://raw.githubusercontent.com/maurodesouza/profile-readme-generator/master/src/assets/icons/social/facebook/default.svg" width="44" height="32" alt="facebook logo"  />
   </a>
@@ -54,8 +55,9 @@
   </a>
 </div>
 
-###
+##
 
+<h3 align="center">Contributions</h3>
 <div align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/nhdkn16/nhdkn16/output/pacman-contribution-graph-dark.svg">
@@ -64,7 +66,7 @@
   </picture>
 </div>
 
-###
+##
 
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=nhdkn16&hide_title=false&hide_rank=true&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=react&locale=en&hide_border=true&order=1&custom_title=Git%20stats" height="150" alt="stats graph"  />
