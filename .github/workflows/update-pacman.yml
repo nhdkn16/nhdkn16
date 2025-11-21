@@ -23,7 +23,7 @@ jobs:
       - name: Generate Pacman graph
         uses: abozanona/pacman-contribution-graph@main
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_TOKEN }}
 
       - name: Move files to dist folder
         run: |
