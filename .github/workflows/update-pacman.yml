@@ -1,38 +1,37 @@
-name: Update Pacman Graph
+name: Generate Pac-Man Contributions
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    # Chạy tự động mỗi 24h
+    - cron: "0 */24 * * *"
+  workflow_dispatch: # Cho phép chạy thủ công
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write
+    branches:
+      - main
 
 jobs:
-  generate-pacman:
+  generate:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+    timeout-minutes: 5
 
-      - name: Generate Pacman graph
+    steps:
+      # 1️⃣ Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Generate Pac-Man SVG
+      - name: Generate pacman-contribution-graph.svg
         uses: abozanona/pacman-contribution-graph@main
         with:
-          github_token: ${{ secrets.PAT_TOKEN }}
+          github_user_name: ${{ github.repository_owner }}
 
-      - name: Move files to dist folder
-        run: |
-          mkdir -p dist
-          mv pacman-contribution-graph*.svg dist/ || true
-
-      - name: Deploy to output branch
+      # 3️⃣ Push to output branch (GitHub Pages)
+      - name: Push pacman SVG to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
           build_dir: dist
-          commit_message: "Update Pacman graph"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
