@@ -21,18 +21,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate Pacman graph
-        uses: jstrieb/github-activity-readme@master
+        uses: abozanona/pacman-contribution-graph@main
         with:
-          commit_message: "Update Pacman graph"
-          committer_username: "GitHub Action"
-          committer_email: "action@github.com"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Move files to dist folder
         run: |
           mkdir -p dist
-          mv output/*.svg dist/ || true
+          mv pacman-contribution-graph*.svg dist/ || true
 
       - name: Deploy to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
